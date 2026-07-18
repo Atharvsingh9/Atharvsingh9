@@ -1,47 +1,99 @@
 <div align="center">
 
-# Atharv Singh
+# 👋 Hi, I'm Atharv Singh
 
-<h3><code>atharv@github:~$ ./contributions.sh</code></h3>
+```bash
+atharv@github:~$ whoami
+```
 
-<img src="./contrib-heatmap.svg" width="860" />
+### AI Backend Developer • Machine Learning Enthusiast • Python Developer
 
-<br><br>
+---
 
-<h3><code>atharv@github:~$ whoami</code></h3>
+## 💻 Professional Summary
 
-<table>
-<tr>
+I'm a Computer Science undergraduate passionate about building intelligent backend systems powered by AI.
 
-<td valign="top">
-<img src="./atharv-ascii.svg" width="360" />
-</td>
+My interests lie in Large Language Models (LLMs), AI infrastructure, backend engineering, evaluation systems, and machine learning. I enjoy designing scalable APIs, experimenting with modern AI architectures, and building production-ready applications that solve real-world problems.
 
-<td valign="top">
-<img src="./info-card.svg" width="500" />
-</td>
+I'm constantly learning new technologies and enjoy working on challenging projects involving AI, automation, backend systems, and cloud-native development.
 
-</tr>
-</table>
+---
 
-<br><br>
+```bash
+atharv@github:~$ cat skills.txt
+```
 
-<h3><code>atharv@github:~$ ls projects</code></h3>
-
-| Project | Description |
-|----------|-------------|
-| AI Feature Flag Platform | AI rollout platform with gradual rollout & quality monitoring |
-| Prompt A/B Testing Platform | Evaluate prompt versions using LLM-as-a-Judge |
-| House Price Prediction | Machine Learning Regression |
-| Android Applications | Kotlin & Jetpack Compose |
-
-<br>
-
-<h3><code>atharv@github:~$ cat contact.txt</code></h3>
+### 🚀 Programming Languages
 
 <p>
-<a href="https://github.com/Atharvsingh9">GitHub</a> •
-<a href="https://www.linkedin.com/in/atharv-s-324102318/">LinkedIn</a>
+Python • C++ • Kotlin • SQL
 </p>
+
+### ⚙️ Backend & APIs
+
+<p>
+FastAPI • REST APIs • PostgreSQL • SQLite • Redis
+</p>
+
+### 🤖 Artificial Intelligence & Machine Learning
+
+<p>
+Generative AI • Prompt Engineering • LLM Evaluation • LangChain • RAG • OpenAI API • Machine Learning • Deep Learning
+</p>
+
+### 📊 Data Science
+
+<p>
+NumPy • Pandas • Scikit-Learn • Matplotlib
+</p>
+
+### ☁️ Tools & DevOps
+
+<p>
+Git • GitHub • GitHub Actions • Docker • Linux
+</p>
+
+### 📱 Mobile Development
+
+<p>
+Android • Jetpack Compose • Firebase
+</p>
+
+### 🛠️ Other Skills
+
+<p>
+System Design • API Design • Database Design • Problem Solving
+</p>
+
+---
+
+```bash
+atharv@github:~$ cat education.txt
+```
+
+🎓 **B.Tech in Computer Science & Engineering**
+
+Gautam Buddha University
+
+---
+
+```bash
+atharv@github:~$ cat contact.txt
+```
+
+📧 **Email:** your-email@example.com
+
+🌐 **GitHub:** https://github.com/Atharvsingh9
+
+💼 **LinkedIn:** https://www.linkedin.com/in/atharv-s-324102318/
+
+---
+
+```bash
+atharv@github:~$ echo "Thanks for visiting!"
+```
+
+*"Always learning. Always building."*
 
 </div>
