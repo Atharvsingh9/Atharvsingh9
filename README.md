@@ -1,90 +1,40 @@
 <div align="center">
 
-# 👋 Hi, I'm Atharv Singh
+<!-- hero: monochrome ASCII portrait (types in) beside a neofetch-style info
+     panel. regenerate portrait: python scripts/prep_photo.py <photo> &&
+     python scripts/make_ascii_svg.py ; info panel: python scripts/make_info_card.py -->
 
-### AI Backend Developer • Machine Learning Enthusiast • Python Developer
+<!-- animated contribution graph: real data, boxes reveal cell by cell
+     (regenerated daily by .github/workflows/update-profile-art.yml) -->
 
----
+<h3><code>avi@github ~ $ ./contributions.sh</code></h3>
 
-## 💻 Professional Summary
+<img src="./contrib-heatmap.svg" width="860" alt="Avi's GitHub contribution graph — auto-refreshed daily" />
 
-I'm a Computer Science undergraduate passionate about building intelligent backend systems powered by Artificial Intelligence.
+<br>
+<br>
 
-My interests include Large Language Models (LLMs), AI infrastructure, backend engineering, machine learning, and scalable API development. I enjoy designing production-ready software, experimenting with modern AI technologies, and solving real-world engineering problems through clean and efficient code.
+<h3><code>avi@github ~ $ whoami</code></h3>
 
-I'm continuously learning new technologies and expanding my expertise in AI, backend systems, cloud technologies, and software architecture.
+<table>
+<tr>
+<td valign="top"><img src="./avi-ascii.svg" width="370" alt="Avi Vashishta — ASCII portrait" /></td>
+<td valign="top"><img src="./info-card.svg" width="490" alt="Avi Vashishta — experience, stack, highlights" /></td>
+</tr>
+</table>
 
----
+<br>
+<br>
 
-## 🚀 Skills
+<h3><code>avi@github ~ $ ./links.sh</code></h3>
 
-### Programming Languages
-- Python
-- C++
-- Kotlin
-- SQL
+<p><b>Fullstack Developer · AI Builder · Instructor</b></p>
 
-### Backend Development
-- FastAPI
-- REST APIs
-- PostgreSQL
-- SQLite
-- Redis
+[![Portfolio](https://img.shields.io/badge/Portfolio-avivashishta.com-0d1117?style=for-the-badge&logo=vercel&logoColor=white)](https://www.avivashishta.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-avivashishta-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/avivashishta)
+[![Instagram](https://img.shields.io/badge/Instagram-avi__vashishta29-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/avi_vashishta29)
+[![Live Terminal](https://img.shields.io/badge/⚡_Live_Terminal-avivashishta29.github.io-22d3ee?style=for-the-badge&logo=gnometerminal&logoColor=black)](https://avivashishta29.github.io)
 
-### Artificial Intelligence & Machine Learning
-- Generative AI
-- Prompt Engineering
-- LLM Evaluation
-- Retrieval-Augmented Generation (RAG)
-- LangChain
-- OpenAI API
-- Machine Learning
-- Deep Learning
-
-### Data Science
-- NumPy
-- Pandas
-- Scikit-learn
-- Matplotlib
-
-### DevOps & Tools
-- Git
-- GitHub
-- GitHub Actions
-- Docker
-- Linux
-
-### Mobile Development
-- Android
-- Jetpack Compose
-- Firebase
-
-### Other Skills
-- System Design
-- API Design
-- Database Design
-- Problem Solving
-
----
-
-## 🎓 Education
-
-**Bachelor of Technology (B.Tech) – Computer Science & Engineering**
-
-Gautam Buddha University
-
----
-
-## 📫 Connect With Me
-
-- 📧 Email: **singhatharv673@gmail.com**
-- 💼 LinkedIn: https://www.linkedin.com/in/atharv-s-324102318/
-- 💻 GitHub: https://github.com/Atharvsingh9
-
----
-
-### Thanks for visiting my profile!
-
-*"Always learning. Always building."*
+<br>
 
 </div>
