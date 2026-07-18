@@ -2,97 +2,88 @@
 
 # 👋 Hi, I'm Atharv Singh
 
-```bash
-atharv@github:~$ whoami
-```
-
 ### AI Backend Developer • Machine Learning Enthusiast • Python Developer
 
 ---
 
 ## 💻 Professional Summary
 
-I'm a Computer Science undergraduate passionate about building intelligent backend systems powered by AI.
+I'm a Computer Science undergraduate passionate about building intelligent backend systems powered by Artificial Intelligence.
 
-My interests lie in Large Language Models (LLMs), AI infrastructure, backend engineering, evaluation systems, and machine learning. I enjoy designing scalable APIs, experimenting with modern AI architectures, and building production-ready applications that solve real-world problems.
+My interests include Large Language Models (LLMs), AI infrastructure, backend engineering, machine learning, and scalable API development. I enjoy designing production-ready software, experimenting with modern AI technologies, and solving real-world engineering problems through clean and efficient code.
 
-I'm constantly learning new technologies and enjoy working on challenging projects involving AI, automation, backend systems, and cloud-native development.
-
----
-
-```bash
-atharv@github:~$ cat skills.txt
-```
-
-### 🚀 Programming Languages
-
-<p>
-Python • C++ • Kotlin • SQL
-</p>
-
-### ⚙️ Backend & APIs
-
-<p>
-FastAPI • REST APIs • PostgreSQL • SQLite • Redis
-</p>
-
-### 🤖 Artificial Intelligence & Machine Learning
-
-<p>
-Generative AI • Prompt Engineering • LLM Evaluation • LangChain • RAG • OpenAI API • Machine Learning • Deep Learning
-</p>
-
-### 📊 Data Science
-
-<p>
-NumPy • Pandas • Scikit-Learn • Matplotlib
-</p>
-
-### ☁️ Tools & DevOps
-
-<p>
-Git • GitHub • GitHub Actions • Docker • Linux
-</p>
-
-### 📱 Mobile Development
-
-<p>
-Android • Jetpack Compose • Firebase
-</p>
-
-### 🛠️ Other Skills
-
-<p>
-System Design • API Design • Database Design • Problem Solving
-</p>
+I'm continuously learning new technologies and expanding my expertise in AI, backend systems, cloud technologies, and software architecture.
 
 ---
 
-```bash
-atharv@github:~$ cat education.txt
-```
+## 🚀 Skills
 
-🎓 **B.Tech in Computer Science & Engineering**
+### Programming Languages
+- Python
+- C++
+- Kotlin
+- SQL
+
+### Backend Development
+- FastAPI
+- REST APIs
+- PostgreSQL
+- SQLite
+- Redis
+
+### Artificial Intelligence & Machine Learning
+- Generative AI
+- Prompt Engineering
+- LLM Evaluation
+- Retrieval-Augmented Generation (RAG)
+- LangChain
+- OpenAI API
+- Machine Learning
+- Deep Learning
+
+### Data Science
+- NumPy
+- Pandas
+- Scikit-learn
+- Matplotlib
+
+### DevOps & Tools
+- Git
+- GitHub
+- GitHub Actions
+- Docker
+- Linux
+
+### Mobile Development
+- Android
+- Jetpack Compose
+- Firebase
+
+### Other Skills
+- System Design
+- API Design
+- Database Design
+- Problem Solving
+
+---
+
+## 🎓 Education
+
+**Bachelor of Technology (B.Tech) – Computer Science & Engineering**
 
 Gautam Buddha University
 
 ---
 
-```bash
-atharv@github:~$ cat contact.txt
-```
+## 📫 Connect With Me
 
-📧 **Email:** your-email@example.com
-
-🌐 **GitHub:** https://github.com/Atharvsingh9
-
-💼 **LinkedIn:** https://www.linkedin.com/in/atharv-s-324102318/
+- 📧 Email: **singhatharv673@gmail.com**
+- 💼 LinkedIn: https://www.linkedin.com/in/atharv-s-324102318/
+- 💻 GitHub: https://github.com/Atharvsingh9
 
 ---
 
-```bash
-atharv@github:~$ echo "Thanks for visiting!"
-```
+### Thanks for visiting my profile!
 
 *"Always learning. Always building."*
 
