@@ -7,14 +7,14 @@
 <!-- animated contribution graph: real data, boxes reveal cell by cell
      (regenerated daily by .github/workflows/update-profile-art.yml) -->
 
-<h3><code>Ath@github ~ $ ./contributions.sh</code></h3>
+<h3><code>Atharv@github ~ $ ./contributions.sh</code></h3>
 
 <img src="./contrib-heatmap.svg" width="860" alt="Ath's GitHub contribution graph — auto-refreshed daily" />
 
 <br>
 <br>
 
-<h3><code>Ath@github ~ $ whoami</code></h3>
+<h3><code>Atharv@github ~ $ whoami</code></h3>
 
 <table>
 <tr>
@@ -26,7 +26,7 @@
 <br>
 <br>
 
-<h3><code>Ath@github ~ $ ./links.sh</code></h3>
+<h3><code>Atharv@github ~ $ ./links.sh</code></h3>
 
 <p><b>Fullstack Developer · AI Builder · Instructor</b></p>
 

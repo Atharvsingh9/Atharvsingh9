@@ -32,7 +32,7 @@ GREEN = "#3fb950"
 ACCENT = "#22d3ee"
 
 # content model: tuples describing each row
-# ("host",)                    -> "Ath@github" + rule
+# ("host",)                    -> "Atharv@github" + rule
 # ("kv", key, value)           -> orange key + light value
 # ("sec", title)               -> blue "— title —" rule
 # ("bul", text)                -> green dot + light text
@@ -84,7 +84,7 @@ parts = [
 for i, dotcol in enumerate(["#ff5f56", "#ffbd2e", "#27c93f"]):
     parts.append(f'<circle cx="{PAD + i*16}" cy="{TITLEBAR_H/2}" r="5" fill="{dotcol}"/>')
 parts.append(f'<text x="{W/2}" y="{TITLEBAR_H/2 + 4}" fill="{MUTED}" font-size="12" '
-             f'text-anchor="middle">Ath@github: ~$ neofetch</text>')
+             f'text-anchor="middle">Atharv@github: ~$ neofetch</text>')
 
 y = TITLEBAR_H + 30
 for i, row in enumerate(ROWS):
