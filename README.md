@@ -1,0 +1,3 @@
+# Atharv Singh
+
+🚧 Building an animated GitHub profile...
