@@ -36,7 +36,7 @@ ACCENT = "#22d3ee"
 ROWS = [
     ("host",),
 
-    ("kv", "Role", "AI Backend Developer"),
+    ("kv",  "AI/ML Enthusiast"),
     ("kv", "Education", "B.Tech CSE"),
     ("kv", "", "Gautam Buddha University"),
 
@@ -44,18 +44,11 @@ ROWS = [
 
     ("sec", "Stack"),
 
-    ("kv", "Languages", "Python, Java, Kotlin"),
-    ("kv", "", "SQL, C++"),
-
-    ("kv", "Backend", "FastAPI"),
-    ("kv", "", "PostgreSQL, Redis"),
-
-    ("kv", "AI / ML", "LangChain, LangGraph"),
-    ("kv", "", "OpenAI, PyTorch"),
-    ("kv", "", "TensorFlow, RAG"),
-
-    ("kv", "Cloud", "Docker"),
-    ("kv", "", "AWS, GitHub Actions"),
+    ("kv", "Languages", "Python, Java, Kotlin, SQL, C++"),
+    ("kv", "Backend", "FastAPI, PostgreSQL, Redis"),
+    ("kv", "AI / ML", "LangChain, LangGraph, OpenAI"),
+    ("kv", "", "PyTorch, TensorFlow, RAG"),
+    ("kv", "Cloud", "Docker, AWS, GitHub Actions"),
 
     ("gap",),
 
@@ -66,7 +59,6 @@ ROWS = [
     ("bul", "Failure Forensics for AI Pipelines"),
     ("bul", "Backend Engineering & System Design"),
 ]
-
 
 def esc(s):
     return html.escape(s)
