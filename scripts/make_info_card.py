@@ -36,7 +36,7 @@ ACCENT = "#22d3ee"
 ROWS = [
     ("host",),
 
-    ("kv",  "AI/ML Enthusiast"),
+    ("kv",  "AI/ML Enthusiast", ""),
     ("kv", "Education", "B.Tech CSE"),
     ("kv", "", "Gautam Buddha University"),
 
@@ -44,8 +44,8 @@ ROWS = [
 
     ("sec", "Stack"),
 
-    ("kv", "Languages", "Python, Java, Kotlin, SQL, C++"),
-    ("kv", "Backend", "FastAPI, PostgreSQL, Redis"),
+    ("kv", "Languages", "Python, Java, Kotlin, SQL, C++",""),
+    ("kv", "Backend", "FastAPI, PostgreSQL, Redis",""),
     ("kv", "AI / ML", "LangChain, LangGraph, OpenAI"),
     ("kv", "", "PyTorch, TensorFlow, RAG"),
     ("kv", "Cloud", "Docker, AWS, GitHub Actions"),
