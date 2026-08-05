@@ -13,6 +13,9 @@ name: Update profile art
 permissions:
   contents: write
 
+env:
+  GH_PROFILE_USER: Atharvsingh9
+
 jobs:
   heatmap:
     runs-on: ubuntu-latest
@@ -30,7 +33,7 @@ jobs:
         run: python scripts/fetch_contributions.py
 
       - name: Render animated contribution graph SVG
-        run: python scripts/generate_streak_svg.py ATHARVSINGH9 contrib-heatmap.svg
+        run: python scripts/generate_streak_svg.py "${{ env.GH_PROFILE_USER }}" contrib-heatmap.svg
 
       - name: Commit updated art
         uses: stefanzweifel/git-auto-commit-action@v5

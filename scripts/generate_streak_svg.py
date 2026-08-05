@@ -1,41 +1,171 @@
 #!/usr/bin/env python3
 """Generate an animated GitHub-streak SVG (squares light up one by one).
+
 Works standalone; designed to run in a GitHub Action daily to stay live.
+
+Data source priority:
+  1. data/contributions.json -- written by scripts/fetch_contributions.py straight
+     from GitHub's own public contribution page (the exact numbers GitHub shows).
+     This is the primary, authoritative source and is always fresh in CI because
+     the fetch step runs first.
+  2. A direct scrape of https://github.com/users/<user>/contributions via the
+     parser in fetch_contributions.py. Used only when the local snapshot is
+     missing (e.g. running standalone on a fresh checkout). There is no
+     dependency on any third-party contribution API.
+
+The streak stats (current / longest / best day) are derived from the daily
+counts locally so they can never drift from the rendered graph.
+
 Usage: python generate_streak_svg.py [username] [output.svg]
 """
 import sys, json, os, datetime, urllib.request
 
-USER = sys.argv[1] if len(sys.argv) > 1 else "ATHARVSINGH9"
-OUT  = sys.argv[2] if len(sys.argv) > 2 else "streak.svg"
+HERE = os.path.dirname(os.path.abspath(__file__))
+LOCAL = os.path.join(HERE, "..", "data", "contributions.json")
+
+if len(sys.argv) > 1:
+    USER = sys.argv[1]
+else:
+    USER = os.environ.get("GH_PROFILE_USER", "Atharvsingh9")
+OUT = sys.argv[2] if len(sys.argv) > 2 else "streak.svg"
+
+
+def level_for(count):
+    if count <= 0:
+        return 0
+    if count <= 4:
+        return 1
+    if count <= 9:
+        return 2
+    if count <= 19:
+        return 3
+    return 4
+
+
+def normalize_days(data):
+    """Accept either our scrape schema or the legacy API schema."""
+    if isinstance(data, dict) and isinstance(data.get("days"), list):
+        raw = data["days"]
+    elif isinstance(data, dict) and isinstance(data.get("contributions"), list):
+        raw = data["contributions"]
+    else:
+        raise ValueError("unrecognized contribution data schema")
+
+    days = []
+    for d in raw:
+        date = d.get("date")
+        if not date:
+            continue
+        try:
+            count = int(d.get("count") or 0)
+        except (TypeError, ValueError):
+            count = 0
+        try:
+            level = int(d.get("level") or level_for(count))
+        except (TypeError, ValueError):
+            level = level_for(count)
+        days.append({"date": date, "count": count, "level": level})
+    days.sort(key=lambda d: d["date"])
+    return days
+
+
+def scrape_github(user):
+    """Direct scrape fallback using the parser from fetch_contributions.py.
+
+    Only reached when data/contributions.json is missing/unusable, so the
+    script still works standalone without any third-party API.
+    """
+    sys.path.insert(0, HERE)
+    try:
+        import fetch_contributions as fc
+    except ImportError as e:
+        raise SystemExit(
+            f"[streak] cannot scrape fallback: fetch_contributions.py missing ({e}). "
+            f"Fix: ensure scripts/fetch_contributions.py exists and that "
+            f"requests + beautifulsoup4 are installed (pip install -r "
+            f"scripts/requirements.txt)."
+        )
+
+    url = f"https://github.com/users/{user}/contributions"
+    print(f"[streak] scraping {url}")
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": fc.HEADERS["User-Agent"]})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            body = r.read().decode("utf-8", "replace")
+        print(f"[streak] scrape status {r.status}, {len(body)} bytes")
+    except Exception as e:
+        raise SystemExit(f"[streak] scrape failed for {user}: {type(e).__name__}: {e}")
+
+    days = fc.parse_contributions_html(body)
+    if not days:
+        raise SystemExit(
+            f"[streak] scrape of {url} returned no calendar cells. GitHub may "
+            f"have changed its markup. The raw HTML can be inspected via "
+            f"scripts/fetch_contributions.py which saves it to debug/github_response.html."
+        )
+    return normalize_days({"days": days})
+
 
 def get_data(user):
-    url = f"https://github-contributions-api.jogruber.de/v4/{user}?y=last"
-    try:
-        with urllib.request.urlopen(url, timeout=25) as r:
-            return json.loads(r.read().decode())
-    except Exception as e:
-        # fallback to a local snapshot if the API is unreachable
-        here = os.path.join(os.path.dirname(os.path.abspath(__file__)), "contrib.json")
-        if os.path.exists(here):
-            print("API failed (%s); using local contrib.json" % e)
-            return json.load(open(here))
-        raise
+    if os.path.exists(LOCAL):
+        try:
+            with open(LOCAL, encoding="utf-8") as f:
+                data = json.load(f)
+            days = normalize_days(data)
+            if days:
+                print(f"[streak] using local snapshot {LOCAL} ({len(days)} days)")
+                return days
+        except Exception as e:
+            print(f"[streak] local snapshot unusable ({e}); scraping GitHub",
+                  file=sys.stderr)
 
-data = get_data(USER)
-contribs = data["contributions"]
-total = data["total"]["lastYear"]
+    return scrape_github(user)
+
+
+def compute_stats(days):
+    total = sum(d["count"] for d in days)
+    active = sum(1 for d in days if d["count"] > 0)
+
+    # current streak: walk backwards from the most recent day; ignore a trailing
+    # zero because today may not be over yet.
+    idx = len(days) - 1
+    if days and days[idx]["count"] == 0:
+        idx -= 1
+    cur = 0
+    while idx >= 0 and days[idx]["count"] > 0:
+        cur += 1
+        idx -= 1
+
+    longest = run = 0
+    for d in days:
+        if d["count"] > 0:
+            run += 1
+            if run > longest:
+                longest = run
+        else:
+            run = 0
+
+    best = max(days, key=lambda d: (d["count"], d["date"])) if days else None
+    return total, active, cur, longest, best
+
+
+contribs = get_data(USER)
+total, active, cur, longest, best = compute_stats(contribs)
+print(f"[streak] parsed {len(contribs)} days: total {total}, active {active}, "
+      f"current streak {cur}, longest {longest}, best {best['count'] if best else 0} on {best['date'] if best else 'n/a'}")
 
 # ---- layout ----
 CELL, GAP, RAD, LEFT, TOP = 13, 3, 2.5, 34, 24
 COLORS = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"]
 FLASH = "#b4ffaa"
 GRAY = "#7d8590"
+GREEN = "#39d353"
 MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
 
 n = len(contribs)
 NW = (n + 6) // 7
 W = LEFT + NW*(CELL+GAP) + 6
-H = TOP + 7*(CELL+GAP) + 22
+H = TOP + 7*(CELL+GAP) + 44   # +22 px for the extra streak footer line
 
 # timing (seconds)
 REVEAL, DUR = 3.6, 0.55
@@ -62,10 +192,13 @@ for i, c in enumerate(contribs):
         f'fill="{COLORS[lvl]}" style="animation-delay:{delay}s"/>'
     )
 
+best_txt = f'<tspan fill="{GRAY}">   &#183;   best </tspan><tspan fill="{GREEN}">{best["count"]:,}</tspan><tspan fill="{GRAY}"> on {best["date"]}</tspan>' if best else ""
+
 svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">
 <style>
   text.lbl {{ fill:{GRAY}; font-size:13px; font-weight:600; }}
   text.total {{ fill:#e6edf3; font-size:15px; font-weight:700; }}
+  text.sub {{ fill:{GRAY}; font-size:12.5px; font-weight:600; }}
   .c {{ transform-box:fill-box; transform-origin:center; opacity:0; animation:pop {DUR}s ease-out both; }}
   .g {{ animation:pop {DUR}s ease-out both, flash {DUR+0.15}s ease-out both; }}
   @keyframes pop {{ 0%{{opacity:0;transform:scale(.2)}} 60%{{opacity:1;transform:scale(1.1)}} 100%{{opacity:1;transform:scale(1)}} }}
@@ -75,8 +208,13 @@ svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewB
 <rect width="{W}" height="{H}" fill="none"/>
 {''.join(labels)}
 {''.join(rects)}
-<text class="total" x="{LEFT}" y="{H-6}">{total:,} contributions in the last year</text>
+<text class="total" x="{LEFT}" y="{H-26}">{total:,} contributions in the last year</text>
+<text class="sub" x="{LEFT}" y="{H-8}">current streak <tspan fill="{GREEN}">{cur}</tspan> days&#183;longest <tspan fill="{GREEN}">{longest}</tspan> days{best_txt}</text>
 </svg>'''
 
-open(OUT, "w").write(svg)
-print(f"Wrote {OUT}: {n} days, {total:,} contributions, {len(svg)//1024} KB")
+try:
+    with open(OUT, "w", encoding="utf-8") as f:
+        f.write(svg)
+except OSError as e:
+    raise SystemExit(f"[streak] could not write {OUT}: {e}")
+print(f"[streak] wrote {OUT}: {n} days, {total:,} contributions, {len(svg)//1024} KB")

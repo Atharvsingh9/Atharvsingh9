@@ -1,0 +1,9 @@
+# Python
+__pycache__/
+*.pyc
+
+# Debug HTTP capture (inspect-only; do not commit)
+debug/
+
+# Stray generated SVG outputs (committed file is contrib-heatmap.svg)
+streak.svg

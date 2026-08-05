@@ -7,6 +7,8 @@ slide-down (CSS keyframes, plays on load then freezes -- no looping "glow"), a
 Less->More legend, and a real stats footer.
 
 Run by .github/workflows/update-profile-art.yml after fetch_contributions.py.
+(The live workflow currently renders with generate_streak_svg.py; this script is
+the full-featured alternative if you prefer the terminal-style stats footer.)
 """
 import datetime
 import json
@@ -78,7 +80,17 @@ def build_grid(days):
 
 
 def render(data):
+    required = ["days", "current_streak", "longest_streak",
+                "total_contributions", "best_day", "range"]
+    missing = [k for k in required if k not in data]
+    if missing:
+        raise ValueError(f"contributions data missing required keys: {missing}")
     days = data["days"]
+    if not days:
+        raise ValueError("contributions data has an empty 'days' list")
+    if not all(isinstance(d, dict) and "date" in d and d.get("count") is not None
+               for d in days):
+        raise ValueError("every day entry must be a dict with a non-null 'count'")
     grid = build_grid(days)
     n_cols = len(grid)
     art_w = n_cols * STEP
@@ -193,8 +205,33 @@ def render(data):
 
 
 if __name__ == "__main__":
-    data = json.load(open(IN_PATH))
-    svg = render(data)
-    with open(OUT_PATH, "w") as f:
+    import sys
+    import traceback
+    try:
+        if not os.path.exists(IN_PATH):
+            print(f"[render] ERROR: input data missing: {IN_PATH}", file=sys.stderr)
+            print("[render] fix: run scripts/fetch_contributions.py first so "
+                  "data/contributions.json exists.", file=sys.stderr)
+            sys.exit(1)
+        with open(IN_PATH, encoding="utf-8") as f:
+            data = json.load(f)
+        svg = render(data)
+    except json.JSONDecodeError as e:
+        print(f"[render] ERROR: {IN_PATH} is not valid JSON: {e}", file=sys.stderr)
+        print("[render] fix: delete the corrupt file and rerun "
+              "scripts/fetch_contributions.py.", file=sys.stderr)
+        traceback.print_exc()
+        sys.exit(1)
+    except (OSError, ValueError, KeyError, TypeError) as e:
+        print(f"[render] failed: {e}", file=sys.stderr)
+        print("[render] fix: regenerate data with scripts/fetch_contributions.py; "
+              "if the error persists the input schema changed.", file=sys.stderr)
+        traceback.print_exc()
+        sys.exit(1)
+    except Exception as e:
+        print(f"[render] unexpected error: {type(e).__name__}: {e}", file=sys.stderr)
+        traceback.print_exc()
+        sys.exit(1)
+    with open(OUT_PATH, "w", encoding="utf-8") as f:
         f.write(svg)
-    print(f"wrote {OUT_PATH} ({len(svg)} bytes)")
+    print(f"[render] wrote {OUT_PATH} ({len(svg)} bytes) from {IN_PATH}")
